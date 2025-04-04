@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Teja PVT Limited</title>
+    <style>
+        body {
+            background: url('card background.jpg') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+            position: relative;
+            overflow: auto;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(50%);
+        }
+        .header {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        .header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin: 10px 0 0;
+            text-transform: uppercase;
+        }
+        .section-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .circle-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+        .circle img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        .circle-text {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #fff;
+        }
+        .icon-label {
+            margin-top: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+        /* Business Cards */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            margin: 15px;
+            padding: 15px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .card h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .card p {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .card button {
+            background-color: #0091f8;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #1ebc57;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop class="background-video">
+            <source src="background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="header">
+            <img src="logo.png" alt="Logo">
+            <h1>SAI TEJA PRIVATE LIMITED</h1>
+        </div>
+    </div>
+    <div class="icon-container">
+        <div>
+            <a href="https://wa.me/8143692348" target="_blank">
+                <div class="circle"><img src="whatsapp.png" alt="whatsapp"></div>
+                <div class="icon-label">Whatsapp</div>
+            </a>
+        </div>
+        <div>
+            <a href="tel:8143692348">
+                <div class="circle"><img src="phone.png" alt="phone"></div>
+                <div class="icon-label">Phone</div>
+            </a>
+        </div>
+        <div>
+            <a href="https://maps.app.goo.gl/ZMHh8ZP5Sft2jrwaA?g_st=com.google.maps.preview.copy" target="_blank">
+                <div class="circle"><img src="location.png" alt="location"></div>
+                <div class="icon-label">Location</div>
+            </a>
+        </div>
+        <div>
+            <a href="mailto:Saitejabolisetti@gmail.com">
+                <div class="circle"><img src="gmail.png" alt="gmail"></div>
+                <div class="icon-label">Gmail</div>
+            </a>
+        </div>
+        <div>
+            <a href="https://www.instagram.com/saitejabolisetti?igsh=MXBvaWNtaHh0NTFnMg%3D%3D&utm_source=qr" target="_blank">
+                <div class="circle"><img src="social.png" alt="social"></div>
+                <div class="icon-label">Instagram</div>
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section-title">Our Featured Businesses</div>
+        <div class="card-container">
+            <div class="card">
+                <img src="Business 1.jpg" alt="Business 1">
+                <h3>Ropes And Generals</h3>
+                <p>Ropes And General Items Are Avilable Here</p>
+                <button onclick="location.href='business1.html'">Learn More</button>
+            </div>
+            <div class="card">
+                <img src="Business 2.jpg" alt="Business 2">
+                <h3>Sai Teja Events</h3>
+                <p>Event Organiser</p>
+                <button onclick="location.href='business2.html'">Learn More</button>
+            </div>
+            <div class="card">
+                <img src="Business 3.jpg" alt="Business 3">
+                <h3>Millet House</h3>
+                <p>Healty Foods</p>
+                <button onclick="location.href='business3.html'">Learn More</button>
+            </div>
+            <div class="card">
+                <img src="Business 4.jpg" alt="Business 4">
+                <h3>Return Gifts</h3>
+                <p>Quality and excellence in every service.</p>
+                <button onclick="location.href='business4.html'">Learn More</button>
+            </div>
+            <div class="card">
+                <img src="Business 5.jpg" alt="Business 5">
+                <h3>Foods</h3>
+                <p>Quality and excellence in every service.</p>
+                <button onclick="location.href='business5.html'">Learn More</button>
+            </div>
+            <div class="card">
+                <img src="Seasonal.jpg" alt="Business 6">
+                <h3>Seasonal Items</h3>
+                <p>Quality and excellence in every service.</p>
+                <button onclick="location.href='business6.html'">Learn More</button>
+            </div>
+            
+        </div>
+        <div class="contact">
+            Contact us: Saitejabolisetti@gmail.com |+91 8143692348| Location:Nagaram,konaseema Dist,Andhra Pradesh
+        </div>
+    </div>
+    <script>
+        document.body.style.zoom = "100%";
+    </script>
+    
+</body>
+</html>
