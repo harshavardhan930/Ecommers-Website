@@ -1,0 +1,40 @@
+function doPost(e) {
+  try {
+    var folderId = "1qCHCxzE0GKCVt1NgqO33c7y5Xue305SF"; // 🔴 Your Drive folder ID
+    var folder = DriveApp.getFolderById(folderId);
+
+    var ImgNm   = e.parameter.image;
+    var ImgData = e.parameter.ImgData;
+    var Img64D  = Utilities.base64Decode(ImgData);
+    var ImgBlob = Utilities.newBlob(Img64D, 'image/jpeg', ImgNm);
+
+    var file = folder.createFile(ImgBlob); // Upload to folder
+    file.setSharing(DriveApp.Access.ANYONE, DriveApp.Permission.VIEW); // Make public
+
+    return ContentService.createTextOutput("Upload Done").setMimeType(ContentService.MimeType.TEXT);
+  } catch (err) {
+    return ContentService.createTextOutput("Error: " + err.message);
+  }
+}
+
+function doGet() {
+  try {
+    var folderId = "1qCHCxzE0GKCVt1NgqO33c7y5Xue305SF"; // 🔴 Your Drive folder ID
+    var folder = DriveApp.getFolderById(folderId);
+    var files = folder.getFiles();
+
+    var images = [];
+    while (files.hasNext()) {
+      var file = files.next();
+      var fileId = file.getId();
+      var imageUrl = "https://drive.google.com/thumbnail?id=" + fileId + "&sz=w1000"; // Thumbnail URL
+      var imageName = file.getName().split(".")[0]; // Name without extension
+      
+      images.push({ name: imageName, url: imageUrl });
+    }
+
+    return ContentService.createTextOutput(JSON.stringify(images)).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput("Error: " + err.message);
+  }
+}

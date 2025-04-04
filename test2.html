@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Gallery</title>
+    <style>
+        .card { border: 1px solid #ccc; padding: 10px; margin: 10px; width: 200px; display: inline-block; vertical-align: top; }
+        .card img { width: 100%; height: 150px; object-fit: cover; }
+        .contact-button, .delete-button { margin-top: 5px; display: block; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <h2>Product Gallery</h2>
+    <div id="cardContainer"></div>
+
+    <h3>Upload New Product</h3>
+    <form id="uploadForm">
+        <input type="text" id="productName" placeholder="Product Name" required><br><br>
+        <input type="file" id="imageFile" accept="image/*" required><br><br>
+        <button type="submit">Upload Product</button>
+    </form>
+
+    <script>
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbwHpOG1AhbM2Zj4FxAvFC-GyHsHlk2kPUiJJVj-LD36k43NU9kpo7gXkczkRcK6RkDUmQ/exec"; // replace with your actual script URL
+
+        // Load existing images
+        function loadDriveImages() {
+            fetch(webAppUrl)
+                .then(response => response.json())
+                .then(images => {
+                    const container = document.getElementById("cardContainer");
+                    container.innerHTML = "";
+
+                    images.forEach(image => {
+                        const card = document.createElement("div");
+                        card.className = "card";
+                        card.innerHTML = `
+                            <img src="${image.url}" alt="${image.name}">
+                            <h3>${image.name}</h3>
+                            <p>Quality products for your needs.</p>
+                            <button class="contact-button" onclick="sendWhatsAppMessage('${image.name}')">Contact on WhatsApp</button>
+                            <button class="delete-button" onclick="deleteCard(this)">Delete Card</button>
+                        `;
+                        container.appendChild(card);
+                    });
+                })
+                .catch(error => console.error("Error fetching images:", error));
+        }
+
+        // Upload new product
+        document.getElementById("uploadForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const productName = document.getElementById("productName").value;
+            const imageFile = document.getElementById("imageFile").files[0];
+
+            const formData = new FormData();
+            formData.append("name", productName);
+            formData.append("image", imageFile);
+
+            fetch(webAppUrl, {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert("Upload successful!");
+                loadDriveImages(); // Refresh product list
+                document.getElementById("uploadForm").reset();
+            })
+            .catch(error => {
+                console.error("Upload failed:", error);
+                alert("Upload failed. Please try again.");
+            });
+        });
+
+        // WhatsApp button
+        function sendWhatsAppMessage(productName) {
+            const phoneNumber = "9461678002";
+            const message = encodeURIComponent("Hello, I'm interested in " + productName + ".");
+            const url = "https://wa.me/" + phoneNumber + "?text=" + message;
+            window.open(url, "_blank");
+        }
+
+        // Delete card from UI
+        function deleteCard(button) {
+            button.parentElement.remove();
+        }
+
+        document.addEventListener("DOMContentLoaded", loadDriveImages);
+    </script>
+
+</body>
+</html>

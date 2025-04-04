@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Cards</title>
+  <style>
+    body {
+      background: url('card-background.jpg') no-repeat center center/cover;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #1a1a1a;
+      color: white;
+    }
+    .header {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .header::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('ropes.jpg') no-repeat center center/cover;
+      filter: brightness(40%) blur(3px);
+    }
+    .header-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .header-logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    .header-title {
+      font-size: 2.5em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .icon-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    }
+    .circle img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .icon-label {
+      margin-top: 5px;
+      font-size: 1em;
+      font-weight: bold;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: linear-gradient(135deg, #ffffff, #ff6f00);
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      width: 280px;
+      margin: 15px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #fff;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .card h3 {
+      margin: 10px 0;
+      font-size: 1.4em;
+    }
+    .card p {
+      font-size: 1em;
+      color: #f3f3f3;
+    }
+    .card button {
+      margin: 5px;
+      padding: 12px 18px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .contact-button {
+      background-color: #25D366;
+      color: white;
+    }
+    .contact-button:hover {
+      background-color: #1ebc57;
+    }
+    .delete-button {
+      background-color: #ff3b30;
+      color: white;
+    }
+    .delete-button:hover {
+      background-color: #cc2b25;
+    }
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    input {
+      width: 250px;
+    }
+    button {
+      background-color: #ff7e5f;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff5733;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <img src="logo.png" alt="Logo" class="header-logo" />
+      <div class="header-title">SAI TEJA ROPES AND GENERALS</div>
+    </div>
+  </div>
+
+  <div class="icon-container">
+    <div>
+      <div class="circle"><img src="whatsapp.png" alt="whatsapp"></div>
+      <div class="icon-label">Whatsapp</div>
+    </div>
+    <div>
+      <div class="circle"><img src="phone.png" alt="phone"></div>
+      <div class="icon-label">Phone</div>
+    </div>
+    <div>
+      <div class="circle"><img src="location.png" alt="location"></div>
+      <div class="icon-label">Location</div>
+    </div>
+    <div>
+      <div class="circle"><img src="gmail.png" alt="gmail"></div>
+      <div class="icon-label">Gmail</div>
+    </div>
+    <div>
+      <div class="circle"><img src="social.png" alt="social"></div>
+      <div class="icon-label">Instagram</div>
+    </div>
+  </div>
+
+  <div class="card-container" id="cardContainer">
+    <!-- Cards will be dynamically added here -->
+  </div>
+
+  <div class="form-container">
+    <h2>Add a New Product</h2>
+    <form id="productForm">
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" placeholder="Enter product name" required><br><br>
+      <input type="file" id="imageInput" accept="image/*" required><br><br>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <script>
+    const webAppUrl = "https://script.google.com/macros/s/AKfycby5BYD4MOCGTvRmOeGgI0iF0ADABIJkQMWiu46NnNrABpdwlRJqg89pn8MTlcLh6dGKpg/exec";
+
+    function sendWhatsAppMessage(productName) {
+      const phoneNumber = "9461678002";
+      const message = encodeURIComponent("Hello, I'm interested in " + productName + ".");
+      const url = "https://wa.me/" + phoneNumber + "?text=" + message;
+      window.open(url, "_blank");
+    }
+
+    function deleteCard(button) {
+      button.parentElement.remove();
+    }
+
+    function uploadImage(event) {
+      event.preventDefault(); // prevent form from submitting normally
+
+      const productName = document.getElementById("productName").value.trim();
+      const fileInput = document.getElementById("imageInput");
+      const file = fileInput.files[0];
+
+      if (!productName || !file) {
+        alert("Please enter product name and select image.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const base64Data = e.target.result.split(',')[1];
+
+        const formData = new FormData();
+        formData.append("image", productName + ".jpg");
+        formData.append("ImgData", base64Data);
+
+        fetch(webAppUrl, {
+          method: "POST",
+          body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+          alert(result);
+          loadDriveImages(); // reload cards
+        })
+        .catch(error => {
+          console.error("Upload error:", error);
+          alert("Upload failed.");
+        });
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    function loadDriveImages() {
+      fetch(webAppUrl)
+        .then(response => response.json())
+        .then(images => {
+          const container = document.getElementById("cardContainer");
+          container.innerHTML = "";
+
+          images.forEach(image => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+              <img src="${image.url}" alt="${image.name}">
+              <h3>${image.name}</h3>
+              <p>Quality products for your needs.</p>
+              <button class="contact-button" onclick="sendWhatsAppMessage('${image.name}')">Contact on WhatsApp</button>
+              <button class="delete-button" onclick="deleteCard(this)">Delete Card</button>
+            `;
+            container.appendChild(card);
+          });
+        })
+        .catch(error => console.error("Error fetching images:", error));
+    }
+
+    document.getElementById("productForm").addEventListener("submit", uploadImage);
+    document.addEventListener("DOMContentLoaded", loadDriveImages);
+  </script>
+</body>
+</html>
